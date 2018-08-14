@@ -1,0 +1,125 @@
+<div class="container">
+    <div id="report">
+        <div class="row">
+            <div class="col-lg-6 col-sm-6">
+                <h3 id="city">{{vm.results.city.name}}, {{vm.results.city.country}}</h3>
+                <h5 id="weatherDiscription">{{vm.results.weather.description}}</h5>
+                <div>
+                    <img>
+                    <div class="temperature">
+                        <h1>{{vm.results.temperature.temp - 273.15}}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<div class="container">
+    <div id="report">
+        <div class="row">
+            <div class="col-sm-4 row1 report-column" ng-repeat="w in weatherResult.list">
+                <div class="row report-cols report-front">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-12 text-right">
+                                {{convertDate(w.dt) | date:'dd/MM/yyyy'}}
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:10px">
+                            <div class="col-sm-6">
+                                <label>Temperature </label>
+                            </div>
+                            <div class="col-sm-6">
+                                {{convertToCelcius(w.temp.day)+"&deg; C" }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label>Minimum </label>
+                            </div>
+                            <div class="col-sm-6">
+                                {{convertToCelcius(w.temp.min)+"&deg; C" }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label>Maximum </label>
+                            </div>
+                            <div class="col-sm-6">
+                                {{convertToCelcius(w.temp.max)+"&deg; C" }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label>Morning </label>
+                            </div>
+                            <div class="col-sm-6">
+                                {{convertToCelcius(w.temp.morn)+"&deg; C" }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label>Evening </label>
+                            </div>
+                            <div class="col-sm-6">
+                                {{convertToCelcius(w.temp.eve)+"&deg; C" }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label>Night </label>
+                            </div>
+                            <div class="col-sm-6">
+                                {{convertToCelcius(w.temp.night)+"&deg; C" }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row report-cols report-back">
+                    <div class="col-sm-12">
+                        <div id="weatherDesc">
+                            <div class="row">
+                                <div class="col-sm-12 text-center" ng-repeat="desc in w.weather">
+                                    <h3>{{desc.description}}</h3>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>Clouds</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    {{w.clouds}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>Humidity</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    {{w.humidity+"%" }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>Pressure</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    {{w.pressure}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>Wind Speed</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    {{w.speed+" Km/hr" }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>-->

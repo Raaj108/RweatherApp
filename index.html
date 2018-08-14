@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" ng-app="weatherApp">
+
+<head>
+   
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Angular Tutorial</title>
+
+    <!--Load Twitter Bootstrap from CDN -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <!--Load Style.css-->
+    <link rel="stylesheet" href="style/style.css">
+</head>
+
+<body>
+
+    <!--Content 1 -->
+    <div class="container">
+        <div ui-view></div>
+    </div>
+
+    <!--Load jquery from CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <!--Load Twitter Bootstrap script from CDN -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!--Load Angularjs from CDN -->
+    <script src="https://code.angularjs.org/1.4.0-rc.2/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
+    <script src="https://code.angularjs.org/1.4.0-rc.2/angular-resource.min.js"></script>
+    <script src="app.js"></script>
+    <script src="config.js"></script>
+    <script src="modules/city/city.service.js"></script>
+    <script src="modules/city/city.controller.js"></script>
+    <script src="modules/forecast/forcast.service.js"></script>
+    <script src="modules/forecast/forecast.controller.js"></script>
+    <!-- <script src="scripts/services.js"></script>
+    <script src="scripts/controllers.js"></script>
+    <script src="scripts/directives.js"></script>-->
+</body>
+
+</html>
