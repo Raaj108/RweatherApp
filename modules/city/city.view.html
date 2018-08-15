@@ -1,21 +1,8 @@
 <div id="search-forecast-content">
-    <div id="search-forecast-content-note">
-        <h3><strong>Note : </strong></h3>
-        <h4>Enter the city name and get the accurate weather of your city.</h4>
-        <hr/>
-    </div>
+  <div id="search-forecast-content-note text-center">
     <h1>Welcome to Forecast</h1>
+    <h3><strong>Note : </strong></h3>
+    <h4>Enter the city name and get the accurate weather of your city.</h4>
     <hr/>
-    <form role="form" ng-submit="submit()">
-        <div class="form-group">
-            <label for="city">
-                <h2>City:  </h2></label>
-            <input class="text-input" type="text" ng-model="city">
-            <a ui-sref="forecast">
-                <input type="submit" class="btn btn-primary submit-btn" value="Sumbit">
-            </a>
-        </div>
-    </form>
-    {{vm.city}}
-    <div ui-view="forecast"></div>
+  </div>
 </div>
