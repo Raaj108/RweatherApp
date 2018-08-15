@@ -1,0 +1,29 @@
+{
+  "name": "rweatherapp",
+  "version": "1.0.0",
+  "description": "Single page weather application showing realtime weather from all around the world.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Raaj108/RweatherApp.git"
+  },
+  "keywords": [
+    "weather",
+    "app"
+  ],
+  "author": "Rajan patil",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Raaj108/RweatherApp/issues"
+  },
+  "homepage": "https://github.com/Raaj108/RweatherApp#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "^1.0.3",
+    "grunt-contrib-less": "^2.0.0",
+    "grunt-contrib-watch": "^1.1.0"
+  }
+}
