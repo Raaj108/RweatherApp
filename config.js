@@ -1,13 +1,13 @@
 //ROUTE CONFIGURATION
 weatherApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
 
-    $urlRouterProvider.otherwise('city');
+    $urlRouterProvider.otherwise('search');
 
     $stateProvider
-        .state('city', {
-            url: '/city',
-            templateUrl: 'modules/city/city.view.html',
-            controller: 'cityCtrl',
+        .state('search', {
+            url: '/search',
+            templateUrl: 'modules/search/search.view.html',
+            controller: 'searchCtrl',
             controllerAs: 'vm'
         })
         .state('forecast', {
