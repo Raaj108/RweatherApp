@@ -1,14 +1,44 @@
-<div id="forecast-report">
+<div id="forecastReport">
   <div class="row">
+    <div class="col-lg-12 col-sm-12">
+      <h2 id="city">{{vm.results.city.name}}, {{vm.results.city.country}}</h2>
+      <h4 id="weatherDiscription">{{vm.results.weather.description}}</h4>
+    </div>
     <div class="col-lg-6 col-sm-6">
-      <h3 id="city">{{vm.results.city.name}}, {{vm.results.city.country}}</h3>
-      <h5 id="weatherDiscription">{{vm.results.weather.description}}</h5>
-      <div>
-        <img>
-        <div class="temperature">
-          <h1>{{vm.results.temperature.temp - 273.15}}</h1>
+      <img>
+      <div class="temperature-blk">
+        {{vm.unit}}
+        <h1 ng-hide="vm.fahrenheit" class="temperature">{{vm.convertToCelcius(vm.results.temperature.temp)}}</h1>
+
+        <h1 ng-show="vm.fahrenheit" class="temperature">{{vm.convertToFahrenheit(vm.results.temperature.temp)}}</h1>
+
+        <div class="units-blk">
+          <span class="units" id="celcius" ng-click="vm.changeUnit('c')">&deg;C </span>
+          <span class="units">|</span>
+          <span class="units" id="fhite" ng-click="vm.changeUnit('f')"> &deg;F</span>
         </div>
       </div>
+    </div>
+    <div class="col-lg-6 col-sm-6">
+      <ul id="weatherConditions">
+        <li>
+          <label>Humidity :</label>
+          <span class="contition-value">{{vm.results.temperature.humidity}}%</span>
+        </li>        
+        <li ng-hide="vm.fahrenheit">
+          <label>Wind : </label>
+          <span class="contition-value">{{vm.convertKM(vm.results.wind.speed)}} km/h</span>
+        </li>
+        <li ng-show="vm.fahrenheit">
+          <label>Wind : </label>
+          <span class="contition-value">{{vm.results.wind.speed}} mph</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      
     </div>
   </div>
 </div>
