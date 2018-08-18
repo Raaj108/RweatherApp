@@ -6,6 +6,34 @@ input {
   }
 }
 
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  margin-top: 20px;
+  /* or inline-flex */
+  .flex-item {
+    flex-grow: 2;
+    text-align: center;
+    padding-bottom: 10px;
+    #lightBoxShadow;
+    /* default 0 */
+    img{
+      width: 60px;
+    }
+    p {
+      width: 75%;
+      margin: 0 auto;
+      span.max-temp {
+        float: left;
+      }
+      span.min-temp {
+        float: right;
+      }
+    }
+  }
+}
+
 //search form
 .sbx {
   position: relative;
@@ -46,7 +74,7 @@ input {
       .units {
         cursor: pointer;
         color: #3377a7;
-        font-size:18px;
+        font-size: 18px;
       }
     }
   }

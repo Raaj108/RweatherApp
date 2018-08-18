@@ -1,44 +1,35 @@
 weatherApp.controller('forecastCtrl', ['forecastService', function (forecastService) {
   var vm = this;
   vm.city = "vadodara";
-  vm.results = {
-    city: '',
-    weather: ''
-  };
+  vm.unit = "c"
+  vm.results = {};
+  var currentTemperature = {};
+
   forecastService.find(vm.city)
     .then(function (result) {
-      vm.results.city = result.city;
-      vm.results.weather = forecastService.weatherInfo(result);
-      vm.results.temperature = forecastService.tempInfo(result);
-      vm.results.wind = forecastService.windInfo(result);
-      console.log(result)
+      vm.results.cityInfo = result.city;
+      vm.results.list = result.list;
+      vm.results.currentWeather = forecastService.getWeatherInfo(result);
+      currentTemperature.currTempInfo = forecastService.getTempInfo(result);
+      vm.getTemperature("c");      
     }, function (error) {
       vm.errors = error;
     });
-  //console.log(vm.results);
 
-  vm.changeUnit = function (unit) {
-    if (unit === 'f') {
-      vm.fahrenheit = true;
-    } else {
-      vm.fahrenheit = false;
-    }
+  vm.getTemperature = function (unit) {
+    vm.currentTemperature = forecastService.getTemperatures(currentTemperature.currTempInfo, unit);
+    vm.setTempList(unit);
+  };
+
+  vm.setTempList = function (unit) {
+    vm.tempList = forecastService.get7Forecasts(vm.results.list, unit);
+    console.log(vm.tempList)
   }
 
-  vm.convertToFahrenheit = function (degk) {
-    return Math.round(1.8 * (degk - 273) + 32);
-  }
-
-  vm.convertToCelcius = function (degk) {
-    return Math.round(degk - 273.15);
-  }
-
-  vm.convertDate = function (date) {
-    return new Date(date * 1000);
-  }
-  
   vm.convertKM = function (speed) {
     return Math.round(speed * 1.609);
   }
+
+ 
 
 }]);

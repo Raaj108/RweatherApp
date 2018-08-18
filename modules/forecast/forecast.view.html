@@ -1,21 +1,17 @@
 <div id="forecastReport">
   <div class="row">
     <div class="col-lg-12 col-sm-12">
-      <h2 id="city">{{vm.results.city.name}}, {{vm.results.city.country}}</h2>
+      <h2 id="city">{{vm.results.cityInfo.name}}, {{vm.results.cityInfo.country}}</h2>
       <h4 id="weatherDiscription">{{vm.results.weather.description}}</h4>
     </div>
     <div class="col-lg-6 col-sm-6">
       <img>
       <div class="temperature-blk">
-        {{vm.unit}}
-        <h1 ng-hide="vm.fahrenheit" class="temperature">{{vm.convertToCelcius(vm.results.temperature.temp)}}</h1>
-
-        <h1 ng-show="vm.fahrenheit" class="temperature">{{vm.convertToFahrenheit(vm.results.temperature.temp)}}</h1>
-
+        <h1 class="temperature">{{vm.currentTemperature.temp}}</h1>
         <div class="units-blk">
-          <span class="units" id="celcius" ng-click="vm.changeUnit('c')">&deg;C </span>
+          <span class="units" id="celcius" ng-click="vm.getTemperature('c')">&deg;C </span>
           <span class="units">|</span>
-          <span class="units" id="fhite" ng-click="vm.changeUnit('f')"> &deg;F</span>
+          <span class="units" id="fhite" ng-click="vm.getTemperature('f')"> &deg;F</span>
         </div>
       </div>
     </div>
@@ -24,7 +20,7 @@
         <li>
           <label>Humidity :</label>
           <span class="contition-value">{{vm.results.temperature.humidity}}%</span>
-        </li>        
+        </li>
         <li ng-hide="vm.fahrenheit">
           <label>Wind : </label>
           <span class="contition-value">{{vm.convertKM(vm.results.wind.speed)}} km/h</span>
@@ -36,9 +32,21 @@
       </ul>
     </div>
   </div>
-  <div class="row">
-    <div class="col-lg-12">
-      
+  <div class="flex-container" id="owk">
+    <div class="flex-item" ng-repeat="listItem in vm.tempList">
+
+      <h6>{{listItem.day}}</h6>
+      <img ng-src="{{listItem.iconSrc}}">
+      <p>
+        <span class="max-temp">{{listItem.temp_max}}</span>
+        <span class="min-temp">{{listItem.temp_min}}</span>
+      </p>
+      <!--
+      <img>
+      <p>
+        <span class="max-temp">{{vm.currentTemperature.temp_max}}</span>
+        <span class="min-temp">{{vm.currentTemperature.temp_min}}</span>
+      </p>-->
     </div>
   </div>
 </div>
