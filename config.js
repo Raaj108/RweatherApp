@@ -1,7 +1,7 @@
 //ROUTE CONFIGURATION
 weatherApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
 
-    $urlRouterProvider.otherwise('search');
+    $urlRouterProvider.otherwise('forecast');
 
     $stateProvider
         .state('search', {

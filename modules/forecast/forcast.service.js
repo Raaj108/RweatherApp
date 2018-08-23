@@ -1,9 +1,38 @@
-weatherApp.factory('forecastService', ['$resource', function ($resource) {
+weatherApp.factory('forecastService', ['$resource', '$q', '$window', function ($resource, $q, $window) {
   var services = {};
+
+  services.getCurrentPosition = function () {
+    var deferred = $q.defer();
+
+    if (!$window.navigator.geolocation) {
+      deferred.reject('Geolocation not supported.');
+    } else {
+      $window.navigator.geolocation.getCurrentPosition(
+        function (position) {
+          var latitude = position.coords.latitude;
+          var longitude = position.coords.longitude;
+          var $url = 'http://maps.googleapis.com/maps/api/geocode/json?latlng=' + latitude + ',' + longitude + '&sensor=true';
+          $.ajax({
+            type: "GET",
+            url: $url,
+            dataType: "json",
+            success: function (data) {
+              deferred.resolve(data.results[0].formatted_address);
+            },
+            error: function (error) {
+              deferred.reject(error);
+            }
+          });
+        },
+        function (err) {
+          deferred.reject(err);
+        });
+    }
+    return deferred.promise;
+  }
 
   services.find = function (city) {
     var baseURL = "http://api.openweathermap.org/data/2.5/forecast";
-
     var weatherAPI = $resource("http://api.openweathermap.org/data/2.5/forecast", {
       callback: "JSON_CALLBACK"
     }, {
@@ -11,12 +40,10 @@ weatherApp.factory('forecastService', ['$resource', function ($resource) {
         method: "JSONP"
       }
     });
-
     var weatherResult = weatherAPI.get({
       q: city,
       appid: "b7b34c59bf0046797f7135fbce4d68f8"
     }).$promise;
-
     return weatherResult;
   }
 
@@ -76,3 +103,4 @@ weatherApp.factory('forecastService', ['$resource', function ($resource) {
 
   return services;
 }]);
+

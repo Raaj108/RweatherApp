@@ -1,20 +1,30 @@
 weatherApp.controller('forecastCtrl', ['forecastService', function (forecastService) {
+
   var vm = this;
-  vm.city = "vadodara";
+
+  vm.currentCity = "";
   vm.unit = "c"
   vm.results = {};
   var currentTemperature = {};
 
-  forecastService.find(vm.city)
-    .then(function (result) {
-      vm.results.cityInfo = result.city;
-      vm.results.list = result.list;
-      vm.results.currentWeather = forecastService.getWeatherInfo(result);
-      currentTemperature.currTempInfo = forecastService.getTempInfo(result);
-      vm.getTemperature("c");      
-    }, function (error) {
-      vm.errors = error;
-    });
+  forecastService.getCurrentPosition().then(function (data) {
+    vm.getForecast(data.split(',')[1].replace(" ", ""));
+  }, function (err) {
+    console.log(err)
+  });
+
+  vm.getForecast = function (city) {
+    forecastService.find(city)
+      .then(function (result) {
+        vm.results.cityInfo = result.city;
+        vm.results.list = result.list;
+        vm.results.currentWeather = forecastService.getWeatherInfo(result);
+        currentTemperature.currTempInfo = forecastService.getTempInfo(result);
+        vm.getTemperature("c");
+      }, function (error) {
+        vm.errors = error;
+      });
+  }
 
   vm.getTemperature = function (unit) {
     vm.currentTemperature = forecastService.getTemperatures(currentTemperature.currTempInfo, unit);
@@ -30,6 +40,7 @@ weatherApp.controller('forecastCtrl', ['forecastService', function (forecastServ
     return Math.round(speed * 1.609);
   }
 
- 
-
+  vm.submit = function () {
+   vm.getForecast(vm.currentCity);
+  }
 }]);

@@ -21,17 +21,6 @@
 <body>
   <!--Content 1 -->
   <div class="container">
-
-    <div class="navbar">
-      <form class="navbar-form" role="form" ng-submit="submit()">
-        <div class="form-group sbx">
-          <input class="tIp" type="text" ng-model="city">
-          <a ui-sref=".forecast" class="srbtn"> <i class="fas fa-search"></i>              
-            </a>
-        </div>
-      </form>
-    </div>
-
     <div ui-view></div>
   </div>
 
@@ -45,15 +34,9 @@
   <script src="https://code.angularjs.org/1.4.0-rc.2/angular-resource.min.js"></script>
   <script src="app.js"></script>
   <script src="config.js"></script>
-  <script src="modules/search/search.service.js"></script>
-  <script src="modules/search/search.controller.js"></script>
-  <script src="modules/city/city.service.js"></script>
   <script src="modules/city/city.controller.js"></script>
   <script src="modules/forecast/forcast.service.js"></script>
   <script src="modules/forecast/forecast.controller.js"></script>
-  <!-- <script src="scripts/services.js"></script>
-    <script src="scripts/controllers.js"></script>
-    <script src="scripts/directives.js"></script>-->
 </body>
 
 </html>
