@@ -18,22 +18,21 @@ weatherApp.controller('forecastCtrl', ['forecastService', function (forecastServ
       .then(function (result) {
         vm.results.cityInfo = result.city;
         vm.results.list = result.list;
-        vm.results.currentWeather = forecastService.getWeatherInfo(result);
-        currentTemperature.currTempInfo = forecastService.getTempInfo(result);
-        vm.getTemperature("c");
+        vm.getTemperature(0, vm.unit);
       }, function (error) {
         vm.errors = error;
       });
   }
 
-  vm.getTemperature = function (unit) {
-    vm.currentTemperature = forecastService.getTemperatures(currentTemperature.currTempInfo, unit);
-    vm.setTempList(unit);
+  vm.getTemperature = function (objectId, unit) {
+    // vm.currentTemperature = forecastService.getTemperatures(currentTemperature.currTempInfo, unit);
+    vm.tempList = vm.setTempList(unit);
+    vm.activeTempList = vm.tempList[objectId]
+    console.log(vm.activeTempList)
   };
 
   vm.setTempList = function (unit) {
-    vm.tempList = forecastService.get7Forecasts(vm.results.list, unit);
-    console.log(vm.tempList)
+    return forecastService.get7Forecasts(vm.results.list, unit);
   }
 
   vm.convertKM = function (speed) {
@@ -41,6 +40,6 @@ weatherApp.controller('forecastCtrl', ['forecastService', function (forecastServ
   }
 
   vm.submit = function () {
-   vm.getForecast(vm.currentCity);
+    vm.getForecast(vm.currentCity);
   }
 }]);

@@ -1,3 +1,55 @@
-#lightBoxShadow{
-   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+#lightBoxShadow {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+#lightBoxShadowHover {
+  box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.16), 0 0 0 2px rgba(0, 0, 0, 0.08);
+}
+
+.marginNotFL {
+  &:not(:first-child):not(:last-child) {
+    margin: 0 5px;
+  }
+
+  &:first-child {
+    margin-right: 5px;
+    margin-left: 1px;
+  }
+
+  &:last-child {
+    margin-left: 5px;
+    margin-right: 1px;
+  }
+}
+
+.marginNotFL2 {
+  &:not(:first-child):not(:last-child) {
+    margin: 0 10px;
+  }
+
+  &:first-child {
+    margin-right: 10px;
+    margin-left: 1px;
+  }
+
+  &:last-child {
+    margin-left: 10px;
+    margin-right: 1px;
+  }
+}
+
+/*Media query rules*/
+
+.maxWidthResponsive(@maxWidth;
+@rules) {
+  @media only screen and (max-width: @maxWidth) {
+    @rules();
+  }
+}
+
+.minWidthResponsive(@minWidth;
+@rules) {
+  @media only screen and (min-width: @minWidth) {
+    @rules();
+  }
 }

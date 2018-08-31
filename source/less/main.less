@@ -1,3 +1,4 @@
+@import "variables";
 @import "mixins";
 
 input {
@@ -6,19 +7,18 @@ input {
   }
 }
 
-.flex-container {
+/*.flex-container {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   margin-top: 20px;
-  /* or inline-flex */
+ 
   .flex-item {
     flex-grow: 2;
     text-align: center;
     padding-bottom: 10px;
     #lightBoxShadow;
-    /* default 0 */
-    img{
+    img {
       width: 60px;
     }
     p {
@@ -32,7 +32,7 @@ input {
       }
     }
   }
-}
+}*/
 
 //search form
 .sbx {
@@ -51,12 +51,15 @@ input {
     font-size: 22px;
     right: 20px;
     line-height: 2.2em;
-
     &:hover,
     &:visited {
-      color: #3377a7;
+      color: @color1;
     }
   }
+  .maxWidthResponsive(480px, {
+    width: 100%;
+  }
+  );
 }
 
 #forecastReport {
@@ -64,18 +67,73 @@ input {
   padding: 20px;
   .temperature-blk {
     position: relative;
+    padding-top: 10px;
+    img {
+      margin-top: -10px;
+    }
     .temperature {
       display: inline;
     }
     .units-blk {
       display: inline;
       position: absolute;
-      top: 0;
+      top: 10px;
       .units {
         cursor: pointer;
-        color: #3377a7;
+        color: @color1;
         font-size: 18px;
       }
     }
+  }
+  ul#weatherConditions {
+    list-style-type: none;
+    padding-top: 10px;
+  }
+}
+
+.container-outer {
+  overflow: scroll;
+  width: 100%;
+  height: 200px;
+  &::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+    /* make scrollbar transparent*/
+  }
+}
+
+.container-inner {
+  width: 1000px;
+}
+
+#owk {
+  margin-top: 20px;
+  .owk-items {
+    width: 134px;
+    display: inline-block;
+    text-align: center;
+    padding-bottom: 10px;
+    .marginNotFL;
+    #lightBoxShadow;
+    &:hover {
+      #lightBoxShadowHover;
+    }
+    img {
+      width: 60px;
+    }
+    p {
+      width: 75%;
+      margin: 0 auto;
+      span.max-temp {
+        float: left;
+      }
+      span.min-temp {
+        float: right;
+      }
+    }
+    .minWidthResponsive(1200px, {
+      .marginNotFL2;
+    }
+    );
   }
 }
