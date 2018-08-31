@@ -11,7 +11,7 @@ weatherApp.factory('forecastService', ['$resource', '$q', '$window', function ($
         function (position) {
           var latitude = position.coords.latitude;
           var longitude = position.coords.longitude;
-          var $url = 'http://maps.googleapis.com/maps/api/geocode/json?latlng=' + latitude + ',' + longitude + '&sensor=true';
+          var $url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + latitude + ',' + longitude + '&sensor=true';
           $.ajax({
             type: "GET",
             url: $url,
@@ -33,7 +33,7 @@ weatherApp.factory('forecastService', ['$resource', '$q', '$window', function ($
 
   //Call Open weather api to get the weather information
   services.find = function (city) {
-    var baseURL = "http://api.openweathermap.org/data/2.5/forecast"; //5 days, every 3 hour
+    var baseURL = "https://api.openweathermap.org/data/2.5/forecast"; //5 days, every 3 hour
     //var baseUrl = "http://api.openweathermap.org/data/2.5/forecast/daily" //16 days daily weather
     var weatherAPI = $resource(baseURL, {
       callback: "JSON_CALLBACK"
@@ -82,7 +82,7 @@ weatherApp.factory('forecastService', ['$resource', '$q', '$window', function ($
       main.temp_max = services.setTempUnit(list[i].main.temp_max, unit);
       main.temp_min = services.setTempUnit(list[i].main.temp_min, unit);
       main.humidity = list[i].main.humidity;
-      main.iconSrc = "http://openweathermap.org/img/w/" + list[i].weather[0].icon + ".png";
+      main.iconSrc = "https://openweathermap.org/img/w/" + list[i].weather[0].icon + ".png";
       main.weather = list[i].weather[0];
       main.wind = list[i].wind;
       tempList.push(main);
