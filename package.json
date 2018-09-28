@@ -20,7 +20,9 @@
     "url": "https://github.com/Raaj108/RweatherApp/issues"
   },
   "homepage": "https://github.com/Raaj108/RweatherApp#readme",
-  "dependencies": {},
+  "dependencies": {
+    "animate.css": "^3.7.0"
+  },
   "devDependencies": {
     "grunt": "^1.0.3",
     "grunt-contrib-less": "^2.0.0",

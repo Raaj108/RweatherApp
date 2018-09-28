@@ -1,35 +1,6 @@
-weatherApp.factory('forecastService', ['$resource', '$q', '$window', function ($resource, $q, $window) {
-  var services = {};
+weatherApp.factory('forecastService', ['$resource', '$q', '$window', 'dateService', function ($resource, $q, $window, dateService) {
 
-  //Get Current location of the user
-  services.getCurrentPosition = function () {
-    var deferred = $q.defer();
-    if (!$window.navigator.geolocation) {
-      deferred.reject('Geolocation not supported.');
-    } else {
-      $window.navigator.geolocation.getCurrentPosition(
-        function (position) {
-          var latitude = position.coords.latitude;
-          var longitude = position.coords.longitude;
-          var $url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + latitude + ',' + longitude + '&sensor=true';
-          $.ajax({
-            type: "GET",
-            url: $url,
-            dataType: "json",
-            success: function (data) {
-              deferred.resolve(data.results[0].formatted_address);
-            },
-            error: function (error) {
-              deferred.reject(error);
-            }
-          });
-        },
-        function (err) {
-          deferred.reject(err);
-        });
-    }
-    return deferred.promise;
-  }
+  var services = {};
 
   //Call Open weather api to get the weather information
   services.find = function (city) {
@@ -70,14 +41,13 @@ weatherApp.factory('forecastService', ['$resource', '$q', '$window', function ($
 
   //Extract 7 weather info.
   services.get7Forecasts = function (list, unit) {
-
     var tempList = [];
     for (i = 0; i < 7; i++) {
       var main = {};
       main.objectId = i;
-      main.day = services.getDay(list[i].dt);
-      main.date = services.getDate(list[i].dt) + " " + services.getMonth(list[i].dt);
-      main.time = services.getTime(list[i].dt);
+      main.day = dateService.getDay(list[i].dt);
+      main.date = dateService.getDate(list[i].dt) + " " + dateService.getMonth(list[i].dt);
+      main.time = dateService.getTime(list[i].dt);
       main.temp = services.setTempUnit(list[i].main.temp, unit);
       main.temp_max = services.setTempUnit(list[i].main.temp_max, unit);
       main.temp_min = services.setTempUnit(list[i].main.temp_min, unit);
@@ -90,98 +60,29 @@ weatherApp.factory('forecastService', ['$resource', '$q', '$window', function ($
     return tempList;
   }
 
-  services.getDate = function (date) {
-    return new Date(date * 1000).getDate();
-  }
+  services.setDailyForecast = function (list, unit) {
+    var arr = {};
 
-  services.getDay = function (date) {
-    var weekDay;
-    switch (new Date(date * 1000).getDay()) {
-      case 0:
-        weekDay = "Sun"
-        break;
-      case 1:
-        weekDay = "Mon"
-        break;
-      case 2:
-        weekDay = "Tue"
-        break;
-      case 3:
-        weekDay = "Wed"
-        break;
-      case 4:
-        weekDay = "Thu"
-        break;
-      case 5:
-        weekDay = "Fri"
-        break;
-      case 6:
-        weekDay = "Sat"
-        break;
-      default:
-        weekDay = "Not Valid Weekday"
-    }
-    return weekDay;
-  }
-
-  services.getMonth = function (date) {
-    var month;
-    switch (new Date(date * 1000).getMonth()) {
-      case 0:
-        month = "Jan"
-        break;
-      case 1:
-        month = "Feb"
-        break;
-      case 2:
-        month = "Mar"
-        break;
-      case 3:
-        month = "Apr"
-        break;
-      case 4:
-        month = "May"
-        break;
-      case 5:
-        month = "Jun"
-        break;
-      case 6:
-        month = "Jul"
-        break;
-      case 7:
-        month = "Aug"
-        break;
-      case 8:
-        month = "Sep"
-        break;
-      case 9:
-        month = "Oct"
-        break;
-      case 10:
-        month = "Nov"
-        break;
-      case 11:
-        month = "Dec"
-        break;
-      default:
-        month = "Not Valid Month"
-    }
-    return month;
-  }
-
-  services.getTime = function (date) {
-    var date = new Date(date * 1000);
-    var unit, time;
-    var hour = date.getHours();
-
-    if (hour == 0 || hour < 12) {
-      unit = "AM";
-    } else {
-      unit = "PM";
+    for (i = 0; i < list.length; i++) {
+      var objectKey = dateService.getDate(list[i].dt) + " " + dateService.getMonth(list[i].dt);
+      if (!arr.hasOwnProperty(objectKey)) {
+        arr[objectKey] = {
+          objectId: i,
+          day: dateService.getDay(list[i].dt),
+          date: objectKey,
+          time: dateService.getTime(list[i].dt),
+          temp: services.setTempUnit(list[i].main.temp, unit),
+          temp_max: services.setTempUnit(list[i].main.temp_max, unit),
+          temp_min: services.setTempUnit(list[i].main.temp_min, unit),
+          humidity: list[i].main.humidity,
+          iconSrc: "https://openweathermap.org/img/w/" + list[i].weather[0].icon + ".png",
+          weather: list[i].weather[0],
+          wind: list[i].wind
+        }
+      }
     }
 
-    time = hour + ":00 " + unit
-    return time;
+    return arr;
   }
 
   services.getWeatherInfo = function (result) {

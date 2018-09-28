@@ -1,13 +1,11 @@
-weatherApp.controller('forecastCtrl', ['forecastService', function (forecastService) {
+weatherApp.controller('forecastCtrl', ['geoLocationService', 'dateService', 'forecastService', function (geoLocationService, dateService, forecastService) {
 
   var vm = this;
-
   vm.currentCity = "";
   vm.unit = "c"
   vm.results = {};
-  var currentTemperature = {};
 
-  forecastService.getCurrentPosition().then(function (data) {
+  geoLocationService.getCurrentPosition().then(function (data) {
     vm.getForecast(data.split(',')[1].replace(" ", ""));
   }, function (err) {
     console.log(err)
@@ -18,21 +16,24 @@ weatherApp.controller('forecastCtrl', ['forecastService', function (forecastServ
       .then(function (result) {
         vm.results.cityInfo = result.city;
         vm.results.list = result.list;
-        vm.getTemperature(0, vm.unit);
+        var date = dateService.getDate(vm.results.list[0].dt) + " " + dateService.getMonth(vm.results.list[0].dt);
+        vm.getTemperature(date, vm.unit);
       }, function (error) {
         vm.errors = error;
       });
   }
 
   vm.getTemperature = function (objectId, unit) {
-    // vm.currentTemperature = forecastService.getTemperatures(currentTemperature.currTempInfo, unit);
-    vm.tempList = vm.setTempList(unit);
-    vm.activeTempList = vm.tempList[objectId]
-    console.log(vm.activeTempList)
+    vm.tempList = vm.dailyForecast(unit);
+    vm.activeTempList = vm.tempList[objectId];
   };
 
   vm.setTempList = function (unit) {
     return forecastService.get7Forecasts(vm.results.list, unit);
+  }
+
+  vm.dailyForecast = function () {
+    return forecastService.setDailyForecast(vm.results.list, vm.unit);
   }
 
   vm.convertKM = function (speed) {

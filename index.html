@@ -18,9 +18,9 @@
 
 <body>
   <!--Content 1 -->
-  <div class="container">
-    <div ui-view></div>
-  </div>
+
+  <div ui-view></div>
+
 
   <!--Load jquery from CDN -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -32,6 +32,8 @@
   <script src="https://code.angularjs.org/1.4.0-rc.2/angular-resource.min.js"></script>
   <script src="app.js"></script>
   <script src="config.js"></script>
+  <script src="modules/forecast/date.service.js"></script>
+  <script src="modules/forecast/geolocation.service.js"></script>
   <script src="modules/city/city.controller.js"></script>
   <script src="modules/forecast/forcast.service.js"></script>
   <script src="modules/forecast/forecast.controller.js"></script>

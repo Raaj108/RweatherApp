@@ -1,58 +1,65 @@
-<div class="navbar">
-  <form class="navbar-form" role="form">
-    <div class="form-group sbx">
-      <input class="tIp" type="text" ng-model="vm.currentCity" placeholder="Search by city">
-      <a class="srbtn" ng-click="vm.submit()"> 
+<header class="header">
+  <div class="container-fluid">
+    <nav class="navbar">
+      <a class="navbar-brand" href="#"><img class="logo" src="/images/logo.png" width="100" alt="RWeatherApp Logo"></a>
+      <form id="searchForm" name="searchForm" class="navbar-form" role="form">
+        <div class="form-group sbx">
+          <input class="tIp" type="text" ng-model="vm.currentCity" placeholder="Search by city">
+          <a class="srbtn" ng-click="vm.submit()"> 
         <i class="fas fa-search"></i>              
       </a>
-    </div>
-  </form>
-</div>
-<div id="forecastReport">
-  <div class="row">
-    <div class="col-lg-12 col-sm-12">
-      <h2 id="city">{{vm.results.cityInfo.name}}, {{vm.results.cityInfo.country}}</h2>
-      <h4 id="time">{{vm.activeTempList.day}}, {{vm.activeTempList.time}}</h4>
-      <h4 id="weatherDiscription">{{vm.activeTempList.weather.description}}</h4>
-    </div>
-    <div class="col-lg-6 col-xs-6">
-      <div class="temperature-blk">
-        <img ng-src="{{vm.activeTempList.iconSrc}}">
-        <h1 class="temperature">{{vm.activeTempList.temp}}</h1>
-        <div class="units-blk">
-          <span class="units" id="celcius" ng-click="vm.getTemperature(0,'c')">&deg;C </span>
-          <span class="units">|</span>
-          <span class="units" id="fhite" ng-click="vm.getTemperature(0,'f')"> &deg;F</span>
+        </div>
+      </form>
+    </nav>
+  </div>
+</header>
+<div class="container">
+  <div id="forecastReport">
+    <div class="row">
+      <div class="col-lg-12 col-sm-12">
+        <h2 id="city">{{vm.results.cityInfo.name}}, {{vm.results.cityInfo.country}}</h2>
+        <h4 id="time">{{vm.activeTempList.day}}, {{vm.activeTempList.time}}</h4>
+        <h4 id="weatherDiscription">{{vm.activeTempList.weather.description}}</h4>
+      </div>
+      <div class="col-lg-6 col-xs-6">
+        <div class="temperature-blk">
+          <img ng-src="{{vm.activeTempList.iconSrc}}">
+          <h1 class="temperature">{{vm.activeTempList.temp}}</h1>
+          <div class="units-blk">
+            <span class="units" id="celcius" ng-click="vm.getTemperature(0,'c')">&deg;C </span>
+            <span class="units">|</span>
+            <span class="units" id="fhite" ng-click="vm.getTemperature(0,'f')"> &deg;F</span>
+          </div>
         </div>
       </div>
+      <div class="col-lg-6 col-xs-6">
+        <ul id="weatherConditions">
+          <li>
+            <label>Humidity :</label>
+            <span class="contition-value">{{vm.activeTempList.humidity}}%</span>
+          </li>
+          <li ng-hide="vm.fahrenheit">
+            <label>Wind : </label>
+            <span class="contition-value">{{vm.convertKM(vm.activeTempList.wind.speed)}} km/h</span>
+          </li>
+          <li ng-show="vm.fahrenheit">
+            <label>Wind : </label>
+            <span class="contition-value">{{vm.activeTempList.wind.speed}} mph</span>
+          </li>
+        </ul>
+      </div>
     </div>
-    <div class="col-lg-6 col-xs-6">
-      <ul id="weatherConditions">
-        <li>
-          <label>Humidity :</label>
-          <span class="contition-value">{{vm.activeTempList.humidity}}%</span>
-        </li>
-        <li ng-hide="vm.fahrenheit">
-          <label>Wind : </label>
-          <span class="contition-value">{{vm.convertKM(vm.activeTempList.wind.speed)}} km/h</span>
-        </li>
-        <li ng-show="vm.fahrenheit">
-          <label>Wind : </label>
-          <span class="contition-value">{{vm.activeTempList.wind.speed}} mph</span>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <div class="container-outer">
-    <div class="container-inner" id="owk">
-      <div class="owk-items" ng-repeat="listItem in vm.tempList" ng-click="vm.getTemperature($index , 'c')">
-        <h4>{{listItem.date}}</h4>
-        <h4>{{listItem.day}}</h4>
-        <img ng-src="{{listItem.iconSrc}}">
-        <p>
-          <span class="max-temp">{{listItem.temp_max}}</span>
-          <span class="min-temp">{{listItem.temp_min}}</span>
-        </p>
+    <div class="container-outer">
+      <div class="container-inner" id="owk">
+        <div class="owk-items" ng-repeat="listItem in vm.tempList" ng-click="vm.getTemperature(listItem.date , 'c')">
+          <h4>{{listItem.date}}</h4>
+          <h4>{{listItem.day}}</h4>
+          <img ng-src="{{listItem.iconSrc}}">
+          <p>
+            <span class="max-temp">{{listItem.temp_max}}</span>
+            <span class="min-temp">{{listItem.temp_min}}</span>
+          </p>
+        </div>
       </div>
     </div>
   </div>
