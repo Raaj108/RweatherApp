@@ -1,39 +1,39 @@
-weatherApp.controller('forecastCtrl', ['geoLocationService', 'dateService', 'forecastService', function (geoLocationService, dateService, forecastService) {
+weatherApp.controller('forecastCtrl', ['locationService', 'dateService', 'graphService', 'forecastService', function (locationService, dateService, graphService, forecastService) {
 
   var vm = this;
-  vm.currentCity = "";
-  vm.unit = "c"
-  vm.results = {};
+  vm.defaultUnit = "c";
+  vm.data = {};
 
-  geoLocationService.getCurrentPosition().then(function (data) {
+ /* locationService.getCurrentPosition().then(function (data) {
     vm.getForecast(data.split(',')[1].replace(" ", ""));
   }, function (err) {
     console.log(err)
-  });
+  });*/
 
   vm.getForecast = function (city) {
     forecastService.find(city)
       .then(function (result) {
-        vm.results.cityInfo = result.city;
-        vm.results.list = result.list;
-        var date = dateService.getDate(vm.results.list[0].dt) + " " + dateService.getMonth(vm.results.list[0].dt);
-        vm.getTemperature(date, vm.unit);
+        vm.data = forecastService.formatData(result);
+        var date = dateService.getDate(vm.data.list[0].dt) + " " + dateService.getMonth(vm.data.list[0].dt);
+        vm.getTemperature(date, vm.defaultUnit);
       }, function (error) {
         vm.errors = error;
       });
   }
 
   vm.getTemperature = function (objectId, unit) {
+    console.log(objectId, unit)
     vm.tempList = vm.dailyForecast(unit);
     vm.activeTempList = vm.tempList[objectId];
+    graphService.setGraphData(vm.setTempList(unit));
   };
 
   vm.setTempList = function (unit) {
-    return forecastService.get7Forecasts(vm.results.list, unit);
+    return forecastService.getDataForGraph(vm.data.list, unit);
   }
 
-  vm.dailyForecast = function () {
-    return forecastService.setDailyForecast(vm.results.list, vm.unit);
+  vm.dailyForecast = function (unit) {
+    return forecastService.setDailyForecast(vm.data.list, unit);
   }
 
   vm.convertKM = function (speed) {

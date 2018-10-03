@@ -129,14 +129,15 @@ header {
   }
   ul#weatherConditions {
     list-style-type: none;
-    padding-top: 10px;
+    padding: 10px;
   }
 }
 
-.container-outer {
-  overflow: scroll;
-  width: 100%;
-  height: 200px;
+
+#containerOuter {
+  height: 400px;
+  overflow-x: hidden;
+  overflow-y: scroll;
   &::-webkit-scrollbar {
     width: 0px;
     background: transparent;
@@ -145,17 +146,17 @@ header {
 }
 
 .container-inner {
-  width: 1000px;
+  width: 100%;
 }
 
 #owk {
   margin-top: 20px;
   .owk-items {
     width: 134px;
+    margin: 5px auto;
     display: inline-block;
     text-align: center;
     padding-bottom: 10px;
-    .marginNotFL;
     #lightBoxShadow;
     &:hover {
       #lightBoxShadowHover;
@@ -173,9 +174,27 @@ header {
         float: right;
       }
     }
-    .minWidthResponsive(1200px, {
-      .marginNotFL2;
-    }
-    );
+
   }
 }
+
+.maxWidthResponsive(480px, {
+  #containerOuter {
+    width: 100%;
+    height: 200px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+  }
+  .container-inner {
+    width: 920px;
+    margin-bottom: 5px;
+  }
+  #owk {
+    margin-top: 10px;
+    .owk-items {
+      .marginNotFL2
+    }
+  }
+}
+
+);

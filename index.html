@@ -6,7 +6,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>RWeather | Weather Application </title>
-
+  <link rel="shortcut icon" href="images/logo.ico" type="image/x-icon">
+  <link rel="icon" href="images/logo.ico" type="image/x-icon">
   <!--Load Twitter Bootstrap from CDN -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
@@ -18,10 +19,7 @@
 
 <body>
   <!--Content 1 -->
-
-  <div ui-view></div>
-
-
+  <div ui-view></div>  
   <!--Load jquery from CDN -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <!--Load Twitter Bootstrap script from CDN -->
@@ -30,11 +28,18 @@
   <script src="https://code.angularjs.org/1.4.0-rc.2/angular.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
   <script src="https://code.angularjs.org/1.4.0-rc.2/angular-resource.min.js"></script>
+  <!--Load Highchart scripts from CDN -->
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/series-label.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/modules/export-data.js"></script>
+
   <script src="app.js"></script>
   <script src="config.js"></script>
   <script src="modules/forecast/date.service.js"></script>
-  <script src="modules/forecast/geolocation.service.js"></script>
-  <script src="modules/city/city.controller.js"></script>
+  <script src="modules/geolocation/geolocation.service.js"></script>
+  <script src="modules/graph/graph.service.js"></script>
+  <script src="modules/graph/graph.controller.js"></script>
   <script src="modules/forecast/forcast.service.js"></script>
   <script src="modules/forecast/forecast.controller.js"></script>
 </body>

@@ -1,4 +1,4 @@
-weatherApp.factory('geoLocationService', ['$q', '$window', function ($q, $window) {
+weatherApp.factory('locationService', ['$q', '$window', function ($q, $window) {
 
   var services = {};
 
@@ -12,7 +12,7 @@ weatherApp.factory('geoLocationService', ['$q', '$window', function ($q, $window
         function (position) {
           var latitude = position.coords.latitude;
           var longitude = position.coords.longitude;
-          var $url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + latitude + ',' + longitude + '&sensor=true';
+          var $url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + latitude + ',' + longitude + '&sensor=true&key=AIzaSyAj7FeRI8Cpe7RD728bJuTwyXs0vHEDpOw';
           $.ajax({
             type: "GET",
             url: $url,

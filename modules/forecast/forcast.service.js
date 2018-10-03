@@ -20,7 +20,15 @@ weatherApp.factory('forecastService', ['$resource', '$q', '$window', 'dateServic
     return weatherResult;
   }
 
+  //Format the result from openweather.com accouring to rweatherapp requirement
+  services.formatData = function (data) {
+    var formatedData = {};
+    formatedData.cityInfo = data.city;
+    formatedData.list = data.list;
+    return formatedData;
+  }
 
+  //Extract Temperature information from the result
   services.getTemperatures = function (currTempInfo, unit) {
     var currTemp = {};
     currTemp.temp = services.setTempUnit(currTempInfo.temp, unit);
@@ -39,22 +47,16 @@ weatherApp.factory('forecastService', ['$resource', '$q', '$window', 'dateServic
     }
   }
 
-  //Extract 7 weather info.
-  services.get7Forecasts = function (list, unit) {
+  //Extract 10 weather info. for graph
+  services.getDataForGraph = function (list, unit) {
     var tempList = [];
-    for (i = 0; i < 7; i++) {
+    for (i = 0; i < 10; i++) {
       var main = {};
-      main.objectId = i;
       main.day = dateService.getDay(list[i].dt);
       main.date = dateService.getDate(list[i].dt) + " " + dateService.getMonth(list[i].dt);
       main.time = dateService.getTime(list[i].dt);
       main.temp = services.setTempUnit(list[i].main.temp, unit);
-      main.temp_max = services.setTempUnit(list[i].main.temp_max, unit);
-      main.temp_min = services.setTempUnit(list[i].main.temp_min, unit);
-      main.humidity = list[i].main.humidity;
-      main.iconSrc = "https://openweathermap.org/img/w/" + list[i].weather[0].icon + ".png";
-      main.weather = list[i].weather[0];
-      main.wind = list[i].wind;
+      main.tempUnit = unit;
       tempList.push(main);
     }
     return tempList;
@@ -62,7 +64,6 @@ weatherApp.factory('forecastService', ['$resource', '$q', '$window', 'dateServic
 
   services.setDailyForecast = function (list, unit) {
     var arr = {};
-
     for (i = 0; i < list.length; i++) {
       var objectKey = dateService.getDate(list[i].dt) + " " + dateService.getMonth(list[i].dt);
       if (!arr.hasOwnProperty(objectKey)) {
@@ -81,7 +82,6 @@ weatherApp.factory('forecastService', ['$resource', '$q', '$window', 'dateServic
         }
       }
     }
-
     return arr;
   }
 
