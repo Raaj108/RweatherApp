@@ -1,6 +1,23 @@
 @import "variables";
 @import "mixins";
 
+
+.maxWidthResponsive(480px, {
+  h1, h2 {
+    font-size: 24px;
+  }
+  h4 {
+    font-size: 16px;
+  }
+}
+
+);
+
+ul {
+  list-style-type: none;
+  padding: 10px;
+}
+
 input {
   &:focus {
     outline: none;
@@ -107,30 +124,45 @@ header {
 #forecastReport {
   #lightBoxShadow;
   padding: 20px;
-  .temperature-blk {
+  #weatherDiscription {
     position: relative;
-    padding-top: 10px;
     img {
-      margin-top: -10px;
+      margin-left: -15px;
+      margin-top: -5px;
     }
-    .temperature {
-      display: inline;
+    h4 {
+      display: inline-block;
+      margin: 0
     }
-    .units-blk {
-      display: inline;
-      position: absolute;
-      top: 10px;
-      .units {
-        cursor: pointer;
-        color: @color1;
-        font-size: 18px;
+  }
+  #weatherConditions {
+    li#tempInfo {
+      padding-top: 20px;
+      padding-bottom: 10px;
+      .temperature {
+        display: inline;
+      }
+      .units-blk {
+        display: inline;
+        position: absolute;
+        top: 30px;
+        .units {
+          cursor: pointer;
+          color: @color1;
+          font-size: 18px;
+        }
       }
     }
+    h4 {
+      display: inline-block;
+      margin: 1px 0 5px 0;
+    }
   }
-  ul#weatherConditions {
-    list-style-type: none;
-    padding: 10px;
+  .maxWidthResponsive(480px, {
+    padding: 0;
+    overflow: hidden;
   }
+  );
 }
 
 
@@ -181,17 +213,22 @@ header {
 .maxWidthResponsive(480px, {
   #containerOuter {
     width: 100%;
-    height: 200px;
+    height: 150px;
     overflow-x: scroll;
     overflow-y: hidden;
   }
   .container-inner {
-    width: 920px;
+    width: 685px;
+    height: 100%;
     margin-bottom: 5px;
   }
   #owk {
     margin-top: 10px;
+    padding-bottom: 15px;
     .owk-items {
+      width: 100px;
+      height: 100%;
+      margin-top: 0px;
       .marginNotFL2
     }
   }

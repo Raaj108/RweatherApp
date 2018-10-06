@@ -32,33 +32,39 @@
         </div>
       </div>
 
-      <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6">
-        <h2 id="city">{{vm.data.cityInfo.name}}, {{vm.data.cityInfo.country}}</h2>
-        <h4 id="time">{{vm.activeTempList.day}}, {{vm.activeTempList.time}}</h4>
-        <h4 id="weatherDiscription">{{vm.activeTempList.weather.description}}</h4>
+      <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+        <ul id="weatherDiscription">
+          <li>
+            <h2 id="city">{{vm.data.cityInfo.name}}, {{vm.data.cityInfo.country}}</h2>
+          </li>
+          <li>
+            <h4 id="time">{{vm.activeTempList.day}}, {{vm.activeTempList.time}}</h4>
+          </li>
+          <li>
+            <img ng-src="{{vm.activeTempList.iconSrc}}">
+            <h4>{{vm.activeTempList.weather.description}}</h4>
+          </li>
+        </ul>
       </div>
       <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6">
-        <div class="temperature-blk">
-          <img ng-src="{{vm.activeTempList.iconSrc}}">
-          <h1 class="temperature">{{vm.activeTempList.temp}}</h1>
-          <div class="units-blk">
-            <span class="units" id="celcius" ng-click="vm.getTemperature(vm.activeTempList.date,'c')">&deg;C </span>
-            <span class="units">|</span>
-            <span class="units" id="fhite" ng-click="vm.getTemperature(vm.activeTempList.date,'f')"> &deg;F</span>
-          </div>
-        </div>
+
         <ul id="weatherConditions">
+          <li id="tempInfo">
+            <h2 class="temperature">{{vm.activeTempList.temp}}</h2>
+            <section class="units-blk">
+              <span class="units" id="celcius" ng-click="vm.getTemperature(vm.activeTempList.date,'c')">&deg;C </span>
+              <span class="units">|</span>
+              <span class="units" id="fhite" ng-click="vm.getTemperature(vm.activeTempList.date,'f')"> &deg;F</span>
+            </section>
+          </li>
           <li>
-            <label>Humidity :</label>
-            <span class="contition-value">{{vm.activeTempList.humidity}}%</span>
+            <h4>Humidity : <span class="contition-value">{{vm.activeTempList.humidity}}%</span></h4>
           </li>
           <li ng-hide="vm.fahrenheit">
-            <label>Wind : </label>
-            <span class="contition-value">{{vm.convertKM(vm.activeTempList.wind.speed)}} km/h</span>
+            <h4>Wind : <span class="contition-value">{{vm.convertKM(vm.activeTempList.wind.speed)}} km/h</span></h4>
           </li>
           <li ng-show="vm.fahrenheit">
-            <label>Wind : </label>
-            <span class="contition-value">{{vm.activeTempList.wind.speed}} mph</span>
+            <h4>Wind : <span class="contition-value">{{vm.activeTempList.wind.speed}} mph</span></h4>
           </li>
         </ul>
       </div>

@@ -27,10 +27,10 @@ weatherApp.factory('graphService', [function () {
         type: 'line'
       },
       title: {
-        text: 'Temperature Graph'
+        text: 'Temperature Graph (' + services.graphData.date[0] + ' to ' + services.graphData.date[services.graphData.date.length - 1] + ')'
       },
       subtitle: {
-        text: 'Displaying temperatures from ' + services.graphData.date[0] + ' to ' + services.graphData.date[services.graphData.date.length - 1]
+        text: 'Source: www.openweather.com'
       },
       xAxis: {
         title: {
@@ -40,18 +40,19 @@ weatherApp.factory('graphService', [function () {
       },
       yAxis: {
         title: {
-          text: 'Temperature in °' + services.graphData.unit.toUpperCase()
+          text: 'Temperature (°' + services.graphData.unit.toUpperCase() + ')'
         }
       },
-      legend: {
-        layout: 'vertical',
-        align: 'left',
-        verticalAlign: 'top',
-        x: -10,
-        y: 100,
-        borderWidth: 0
+      plotOptions: {
+        line: {
+          dataLabels: {
+            enabled: true
+          },
+          enableMouseTracking: true
+        }
       },
       series: [{
+        name: null,
         data: services.graphData.yData
         }],
       responsive: {
@@ -60,11 +61,6 @@ weatherApp.factory('graphService', [function () {
             maxWidth: 500
           },
           chartOptions: {
-            legend: {
-              align: 'center',
-              verticalAlign: 'bottom',
-              layout: 'horizontal'
-            },
             yAxis: {
               labels: {
                 align: 'left',
