@@ -51,11 +51,11 @@ weatherApp.factory('forecastService', ['$resource', '$q', '$window', 'dateServic
   services.getDataForGraph = function (list, unit) {
     var tempList = [];
     for (i = 0; i < 10; i++) {
-      var main = {};
+      var main = {};     
       main.day = dateService.getDay(list[i].dt);
       main.date = dateService.getDate(list[i].dt) + " " + dateService.getMonth(list[i].dt);
       main.time = dateService.getTime(list[i].dt);
-      main.temp = services.setTempUnit(list[i].main.temp, unit);
+      main.temp = services.setTempUnit(list[i].main.temp, unit);  
       main.tempUnit = unit;
       tempList.push(main);
     }

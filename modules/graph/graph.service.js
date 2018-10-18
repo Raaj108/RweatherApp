@@ -52,7 +52,7 @@ weatherApp.factory('graphService', [function () {
         }
       },
       series: [{
-        name: null,
+        name: "Temperature",
         data: services.graphData.yData
         }],
       responsive: {

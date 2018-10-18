@@ -24,6 +24,10 @@ input {
   }
 }
 
+.active {
+  color: @active !important;
+}
+
 /*.flex-container {
   display: flex;
   flex-direction: row;
@@ -148,7 +152,7 @@ header {
         top: 30px;
         .units {
           cursor: pointer;
-          color: @color1;
+          color: @notactive;
           font-size: 18px;
         }
       }
@@ -183,7 +187,7 @@ header {
 
 
 #containerOuter {
-  height: 400px;
+  height: 550px;
   overflow-x: hidden;
   overflow-y: scroll;
   &::-webkit-scrollbar {
@@ -191,6 +195,19 @@ header {
     background: transparent;
     /* make scrollbar transparent*/
   }
+  .scroll-owk-items {
+    font-size: 30px;
+    margin-left: 35%;
+  }
+
+  #scrollUp {
+    text-shadow: 1px -1px grey;
+  }
+
+  #scrollDown {
+    text-shadow: 1px 1px grey;
+  }
+
 }
 
 .container-inner {
