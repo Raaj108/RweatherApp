@@ -127,7 +127,10 @@ header {
 
 #forecastReport {
   #lightBoxShadow;
-  padding: 20px;
+  padding: 40px 20px;
+  .row{
+    position: relative;
+  }
   #weatherDiscription {
     position: relative;
     img {
@@ -185,7 +188,6 @@ header {
   );
 }
 
-
 #containerOuter {
   height: 550px;
   overflow-x: hidden;
@@ -194,20 +196,23 @@ header {
     width: 0px;
     background: transparent;
     /* make scrollbar transparent*/
-  }
-  .scroll-owk-items {
+  }  
+}
+
+.scroll-owk-items {    
+    position: absolute;
+    left: 6%;
     font-size: 30px;
-    margin-left: 35%;
-  }
+  } 
 
-  #scrollUp {
-    text-shadow: 1px -1px grey;
-  }
+#scrollUp {
+  text-shadow: 1px -1px grey;
+  top:-25px;
+}
 
-  #scrollDown {
-    text-shadow: 1px 1px grey;
-  }
-
+#scrollDown {
+  text-shadow: 1px 1px grey;
+  bottom: -25px;
 }
 
 .container-inner {

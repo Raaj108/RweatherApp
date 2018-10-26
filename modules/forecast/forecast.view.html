@@ -20,8 +20,8 @@
   </section>
   <div id="forecastReport">
     <div class="row">
-      <div id="containerOuter" class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
-        <i id="scrollUp" class="fa fa-chevron-up scroll-owk-items" aria-hidden="true" ng-click="vm.scrollUp()"></i>
+       <i id="scrollUp" class="fa fa-chevron-up scroll-owk-items" aria-hidden="true" ng-click="vm.scrollUp()"></i>
+       <div id="containerOuter" class="col-lg-2 col-md-2 col-sm-12 col-xs-12">       
         <div class="container-inner" id="owk">
           <div class="owk-items" ng-repeat="listItem in vm.tempList" ng-click="vm.getTemperature(listItem.date , 'c')">
             <h4>{{listItem.date}}</h4>
@@ -32,10 +32,9 @@
               <span class="min-temp">{{listItem.temp_min}}</span>
             </p>
           </div>
-        </div>
-        <i id="scrollDown" class="fa fa-chevron-down scroll-owk-items" aria-hidden="true" ng-click="vm.scrollDown()"></i>
+        </div>        
       </div>
-
+      <i id="scrollDown" class="fa fa-chevron-down scroll-owk-items" aria-hidden="true" ng-click="vm.scrollDown()"></i>
 
       <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
         <ul id="weatherDiscription">

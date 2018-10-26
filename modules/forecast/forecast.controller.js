@@ -52,15 +52,19 @@ weatherApp.controller('forecastCtrl', ['locationService', 'dateService', 'graphS
   }
 
   vm.scrollUp = function () {
-    $('.container-inner').animate({
-      scrollTop: 0
-    }, 500);
+    var currPosition = $('#containerOuter').scrollTop();
+    var newPosition = currPosition - 300;
+    $('#containerOuter').animate({
+      scrollTop: newPosition
+    }, 200);
   }
 
   vm.scrollDown = function () {
-    $('.container-inner').animate({
-      scrollTop: 100
-    }, 500);
+    var currPosition = $('#containerOuter').scrollTop();
+    var newPosition = currPosition + 300;
+    $('#containerOuter').animate({
+      scrollTop: newPosition
+    }, 200);
   }
 
   vm.formatErrors = function (error) {
