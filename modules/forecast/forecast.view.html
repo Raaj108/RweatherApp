@@ -3,7 +3,7 @@
     <nav class="navbar">
       <a class="navbar-brand" href="#">
         <img class="logo" src="images/logo.png" width="100" alt="RWeatherApp Logo"></a>
-      <form id="searchForm" name="searchForm" class="navbar-form" role="form">
+      <form id="searchForm" name="searchForm" class="navbar-form" role="form" ng-submit="vm.submit()">
         <div class="form-group sbx">
           <input class="tIp" type="text" ng-model="vm.currentCity" placeholder="Search by city">
           <a class="srbtn" ng-click="vm.submit()"> 
