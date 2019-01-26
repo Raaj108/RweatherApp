@@ -3,10 +3,10 @@
     <nav class="navbar">
       <a class="navbar-brand" href="#">
         <img class="logo" src="images/logo.png" width="100" alt="RWeatherApp Logo"></a>
-      <form id="searchForm" name="searchForm" class="navbar-form" role="form" ng-submit="vm.submit()">
+      <form id="searchForm" name="searchForm" class="navbar-form" role="form" ng-submit="vm.app.submit()">
         <div class="form-group sbx">
-          <input class="tIp" type="text" ng-model="vm.currentCity" placeholder="Search by city">
-          <a class="srbtn" ng-click="vm.submit()"> 
+          <input class="tIp" type="text" ng-model="vm.app.searchCity" placeholder="Search by city">
+          <a class="srbtn" ng-click="vm.app.submit()"> 
         <i class="fas fa-search"></i>              
       </a>
         </div>
@@ -20,10 +20,10 @@
   </section>
   <div id="forecastReport">
     <div class="row">
-       <i id="scrollUp" class="fa fa-chevron-up scroll-owk-items" aria-hidden="true" ng-click="vm.scrollUp()"></i>
-       <div id="containerOuter" class="col-lg-2 col-md-2 col-sm-12 col-xs-12">       
+      <i id="scrollUp" class="fa fa-chevron-up scroll-owk-items" aria-hidden="true" ng-click="vm.scrollUp()"></i>
+      <div id="containerOuter" class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
         <div class="container-inner" id="owk">
-          <div class="owk-items" ng-repeat="listItem in vm.tempList" ng-click="vm.getTemperature(listItem.date , 'c')">
+          <div class="owk-items" ng-repeat="listItem in vm.app.dataToDisplay" ng-click="vm.app.getDataToDisplay(listItem.date , 'c')">
             <h4>{{listItem.date}}</h4>
             <h4>{{listItem.day}}</h4>
             <img ng-src="{{listItem.iconSrc}}">
@@ -32,43 +32,40 @@
               <span class="min-temp">{{listItem.temp_min}}</span>
             </p>
           </div>
-        </div>        
+        </div>
       </div>
       <i id="scrollDown" class="fa fa-chevron-down scroll-owk-items" aria-hidden="true" ng-click="vm.scrollDown()"></i>
 
       <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
         <ul id="weatherDiscription">
           <li>
-            <h2 id="city">{{vm.data.cityInfo.name}}, {{vm.data.cityInfo.country}}</h2>
+            <h2 id="city">{{vm.app.rawData.cityInfo.name}}, {{vm.app.rawData.cityInfo.country}}</h2>
           </li>
           <li>
-            <h4 id="time">{{vm.activeTempList.day}}, {{vm.activeTempList.time}}</h4>
+            <h4 id="time">{{vm.app.selectedForecastCard.day}}, {{vm.app.selectedForecastCard.date}} {{vm.app.selectedForecastCard.time}}</h4>
           </li>
           <li>
-            <img ng-src="{{vm.activeTempList.iconSrc}}">
-            <h4>{{vm.activeTempList.weather.description}}</h4>
+            <img ng-src="{{vm.app.selectedForecastCard.iconSrc}}">
+            <h4>{{vm.app.selectedForecastCard.weather.description}}</h4>
           </li>
         </ul>
       </div>
-      <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6">
+      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
 
         <ul id="weatherConditions">
           <li id="tempInfo">
-            <h2 class="temperature">{{vm.activeTempList.temp}}</h2>
+            <h2 class="temperature">{{vm.app.selectedForecastCard.temp}}</h2>
             <section class="units-blk">
-              <span class="units active" id="celcius" ng-click="vm.getTemperature(vm.activeTempList.date,'c')">&deg;C </span>
+              <span class="units active" id="celcius" ng-click="vm.app.getDataToDisplay(vm.app.selectedForecastCard.date,'c')">&deg;C </span>
               <span class="units">|</span>
-              <span class="units" id="fhite" ng-click="vm.getTemperature(vm.activeTempList.date,'f')"> &deg;F</span>
+              <span class="units" id="fhite" ng-click="vm.app.getDataToDisplay(vm.app.selectedForecastCard.date,'f')"> &deg;F</span>
             </section>
           </li>
           <li>
-            <h4>Humidity : <span class="contition-value">{{vm.activeTempList.humidity}}%</span></h4>
+            <h4>Humidity: <span class="contition-value">{{vm.app.selectedForecastCard.humidity}}%</span></h4>
           </li>
-          <li ng-hide="vm.fahrenheit">
-            <h4>Wind : <span class="contition-value">{{vm.convertKM(vm.activeTempList.wind.speed)}} km/h</span></h4>
-          </li>
-          <li ng-show="vm.fahrenheit">
-            <h4>Wind : <span class="contition-value">{{vm.activeTempList.wind.speed}} mph</span></h4>
+          <li>
+            <h4>Wind: <span class="contition-value">{{vm.app.selectedForecastCard.wind.speed}}, {{vm.app.selectedForecastCard.wind.deg}}°</span></h4>
           </li>
         </ul>
       </div>

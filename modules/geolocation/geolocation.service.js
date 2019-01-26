@@ -19,7 +19,7 @@ weatherApp.factory('locationService', ['$q', '$window', function ($q, $window) {
             dataType: "json",
             success: function (data) {              
               if (data.error_message && data.error_message.length > 0) {
-                deferred.resolve(data);
+                deferred.resolve(err);
               } else {
                 deferred.resolve(data.results[0].formatted_address);
               }

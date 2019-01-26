@@ -16,8 +16,7 @@ weatherApp.factory('graphService', [function () {
         services.graphData.date.push(data[i].date)
       }
     }
-    services.graphData.unit = (data[0].tempUnit)
-    console.log(services.graphData)
+    services.graphData.unit = (data[0].tempUnit)    
     services.generateGraph();
   }
 
@@ -27,7 +26,7 @@ weatherApp.factory('graphService', [function () {
         type: 'line'
       },
       title: {
-        text: 'Temperature Graph (' + services.graphData.date[0] + ' to ' + services.graphData.date[services.graphData.date.length - 1] + ')'
+        text: 'Temperature Graph for next 24 Hours'
       },
       subtitle: {
         text: 'Source: www.openweather.com'

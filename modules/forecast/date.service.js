@@ -88,6 +88,7 @@ weatherApp.factory('dateService', function () {
     if (hour == 0 || hour < 12) {
       unit = "AM";
     } else {
+      hour = hour - 12;
       unit = "PM";
     }
 
