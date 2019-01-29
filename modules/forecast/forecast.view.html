@@ -26,7 +26,7 @@
           <div class="owk-items" ng-repeat="listItem in vm.app.dataToDisplay" ng-click="vm.app.getDataToDisplay(listItem.date , 'c')">
             <h4>{{listItem.date}}</h4>
             <h4>{{listItem.day}}</h4>
-            <img ng-src="{{listItem.iconSrc}}">
+            <img ng-src="{{listItem.iconSrc}}" alt="forecast icon">
             <p>
               <span class="max-temp">{{listItem.temp_max}}</span>
               <span class="min-temp">{{listItem.temp_min}}</span>
@@ -45,7 +45,7 @@
             <h4 id="time">{{vm.app.selectedForecastCard.day}}, {{vm.app.selectedForecastCard.date}} {{vm.app.selectedForecastCard.time}}</h4>
           </li>
           <li>
-            <img ng-src="{{vm.app.selectedForecastCard.iconSrc}}">
+            <img ng-src="{{vm.app.selectedForecastCard.iconSrc}}" alt="forecast icon">
             <h4>{{vm.app.selectedForecastCard.weather.description}}</h4>
           </li>
         </ul>

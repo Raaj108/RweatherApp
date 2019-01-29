@@ -5,12 +5,14 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="SPA PWA weather app">
+  <meta name="theme-color" content="#87cefa">
   <title>RWeather | Weather Application </title>
+  <link rel="manifest" href="/manifest.json">
   <link rel="shortcut icon" href="images/logo.ico" type="image/x-icon">
   <link rel="icon" href="images/logo.ico" type="image/x-icon">
   <!--Load Twitter Bootstrap from CDN -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
   <!-- Fontawesome icons-->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
   <!--Load Style.css-->
@@ -19,7 +21,22 @@
 
 <body>
   <!--Content 1 -->
-  <div ui-view></div>  
+  <div ui-view></div>
+
+  <!--Register Service Worker-->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js').then(function(registration) {
+          console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        }, function(err) {
+          console.log('ServiceWorker registration failed:', err)
+        });
+      });
+    }
+
+  </script>
+
   <!--Load jquery from CDN -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <!--Load Twitter Bootstrap script from CDN -->
