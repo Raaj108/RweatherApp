@@ -3,10 +3,10 @@ weatherApp.controller('forecastCtrl', ['locationService', 'dateService', 'graphS
   var vm = this;
   vm.app = {
     isLoading: true,
-    selectedCities: [],
     defaultUnit: "c",
     rawData: {}
   }
+
 
   /*****************************************************************************
    *
@@ -19,10 +19,8 @@ weatherApp.controller('forecastCtrl', ['locationService', 'dateService', 'graphS
 
   // TODO add saveSelectedCities function here
   // Save list of cities to localStorage.
-  vm.app.saveSelectedCity = function () {
-    console.log(vm.app.selectedCity)
-    var selectedCity = vm.app.selectedCity;
-    localStorage.selectedCity = selectedCity;
+  vm.app.saveSelectedCity = function (cityToSave) {
+    localStorage.selectedCity = cityToSave;
   };
 
   /*****************************************************************************
@@ -82,8 +80,9 @@ weatherApp.controller('forecastCtrl', ['locationService', 'dateService', 'graphS
    ****************************************************************************/
 
   //Gets the forecast by searching city name
-  vm.app.submit = function () {
+  vm.app.submit = function () {    
     vm.app.getForecast(vm.app.searchCity);
+    vm.app.saveSelectedCity(vm.app.searchCity);
   }
 
   /*
@@ -111,8 +110,7 @@ weatherApp.controller('forecastCtrl', ['locationService', 'dateService', 'graphS
    * Handle error messages
    *
    ****************************************************************************/
-  vm.formatErrors = function (error) {
-    console.log(error);
+  vm.formatErrors = function (error) {   
     var errorMessages = [];
     if (error.status === 404 && error.config.url === "https://api.openweathermap.org/data/2.5/forecast") {
       errorMessages.push("Please enter a correct city name");
@@ -134,26 +132,27 @@ weatherApp.controller('forecastCtrl', ['locationService', 'dateService', 'graphS
    *   Instead, check out IDB (https://www.npmjs.com/package/idb) or
    *   SimpleDB (https://gist.github.com/inexorabletash/c8069c042b734519680c)
    ************************************************************************/
-  vm.app.selectedCity = localStorage.selectedCity;
-  if (vm.app.selectedCity) {
-    console.log(vm.app.selectedCity);
-    vm.app.getForecast(vm.app.selectedCity);
-  } else {
-    /* The user is using the app for the first time, or the user has not
-     * searched and saved any cities, get the user's location via IP lookup and then inject
-     * that data into the page. Then store the city in localstorage.
-     */
-    locationService.getCurrentPosition().then(function (response) {
-      if (response.status === "REQUEST_DENIED" || response.status === "OVER_QUERY_LIMIT") {
-        vm.formatErrors(response);
-      } else {
-        vm.app.selectedCity = response.split(',')[1].replace(" ", "");
-        vm.app.getForecast(vm.app.selectedCity);
-        vm.app.saveSelectedCity();
-      }
-    }, function (err) {
-      vm.formatErrors(err);
-    });
+  vm.app.init = function () {
+    vm.app.selectedCity = localStorage.selectedCity;   
+    if (vm.app.selectedCity) {
+      vm.app.getForecast(vm.app.selectedCity);
+    } else {
+      /* The user is using the app for the first time, or the user has not
+       * searched and saved any cities, get the user's location via IP lookup and then inject
+       * that data into the page. Then store the city in localstorage.
+       */
+      locationService.getCurrentPosition().then(function (response) {
+        if (response.status === "REQUEST_DENIED" || response.status === "OVER_QUERY_LIMIT") {
+          vm.formatErrors(response);
+        } else {
+          vm.app.selectedCity = response.split(',')[1].replace(" ", "");
+          vm.app.getForecast(vm.app.selectedCity);
+          vm.app.saveSelectedCity(vm.app.selectedCity);
+        }
+      }, function (err) {
+        vm.formatErrors(err);
+      });
+    }
   }
-
+  vm.app.init();
 }]);

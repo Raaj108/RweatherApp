@@ -1,20 +1,38 @@
 var CACHE_NAME = 'rweatherApp_cache_v1';
 var urlsToCache = [
   //Array of urls of files to be cached
+  '/',
+  '/index.html',
   '/dest/css/styles.css',
-  '/images'
+  '/images/icon.png',
+  '/images/logo.png'
 ];
-
 
 //Perform serviceWorker installation
 self.addEventListener('install', function (event) {
+  console.log('Installing ServiceWorker');
   event.waitUntil(
     caches.open(CACHE_NAME)
     .then(function (cache) {
-      console.log('cache opened');
+      console.log('ServiceWorker Caching app shell');
       return cache.addAll(urlsToCache);
     })
   );
+});
+
+self.addEventListener('activate', function (e) {
+  console.log('[ServiceWorker] Activate');
+  e.waitUntil(
+    caches.keys().then(function (keyList) {
+      return Promise.all(keyList.map(function (key) {
+        if (key !== CACHE_NAME) {
+          console.log('[ServiceWorker] Removing old cache', key);
+          return caches.delete(key);
+        }
+      }));
+    })
+  );
+  return self.clients.claim();
 });
 
 //Fetch cache 
